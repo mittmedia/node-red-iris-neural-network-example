@@ -2,28 +2,28 @@
     {
         "id": "6b6290b0.1a853",
         "type": "tab",
-        "label": "Data collection flow",
+        "label": "Data preprocessing",
         "disabled": false,
         "info": ""
     },
     {
         "id": "e3e29167.088cf8",
         "type": "tab",
-        "label": "NN Modeling flow",
+        "label": "Modeling",
         "disabled": false,
         "info": ""
     },
     {
         "id": "1136490a.a15807",
         "type": "tab",
-        "label": "Evaluation of models flow",
+        "label": "Evaluation of models",
         "disabled": false,
         "info": ""
     },
     {
         "id": "59ab95b7.f411fc",
         "type": "tab",
-        "label": "HTTP Service",
+        "label": "Deployment",
         "disabled": false,
         "info": ""
     },
@@ -1022,26 +1022,6 @@
         ]
     },
     {
-        "id": "45ba2014.97d038",
-        "type": "inject",
-        "z": "e3e29167.088cf8",
-        "name": "Kör",
-        "topic": "",
-        "payload": "",
-        "payloadType": "str",
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": "1",
-        "x": 250,
-        "y": 120,
-        "wires": [
-            [
-                "b00cee40.76d54"
-            ]
-        ]
-    },
-    {
         "id": "769341f0.bc40d8",
         "type": "stream-read-file",
         "z": "f6d4da8d.2deed8",
@@ -1314,20 +1294,6 @@
         "wires": [
             [
                 "361fbd83.e3014a"
-            ]
-        ]
-    },
-    {
-        "id": "c084096d.f96b5",
-        "type": "subflow:f6d4da8d.2deed8",
-        "z": "e3e29167.088cf8",
-        "name": "",
-        "env": [],
-        "x": 700,
-        "y": 120,
-        "wires": [
-            [
-                "fec59e5e.ce8938"
             ]
         ]
     },
@@ -1778,9 +1744,9 @@
         "type": "comment",
         "z": "e3e29167.088cf8",
         "name": "Model tränings process",
-        "info": " - Data preprocessing\n   - formatera data labels\n   - Dela in datasetet till träning och test data\n   - Visualisera data i [UI-dashboard](http://10.15.1.134:1881/ui)\n - Att bygga ett Neuralt nätverk\n   - Skapa en sequence model\n   - Lägg till neurala nätverkslager till modellen\n   - Kompilera modellen med en optimerare och vilka mätningar som ska göras under träning\n - Träna modellen\n   - Test- och träningsdatat skickas in i modellen\n   - Iterera genom datat flera gånger genom olika epoker för att låta vikterna på nätverket konvergera/stabiliseras\n   - Utvärdera resultatet och lagra modellen på disk\n   - Visualisera modellen i [UI-dashboard](http://10.15.1.134:1881/ui)\n",
+        "info": " - Att bygga ett Neuralt nätverk\n   - Skapa en sequence model\n   - Lägg till neurala nätverkslager till modellen\n   - Kompilera modellen med en optimerare och vilka mätningar som ska göras under träning\n - Träna modellen\n   - Test- och träningsdatat skickas in i modellen\n   - Iterera genom datat flera gånger genom olika epoker för att låta vikterna på nätverket konvergera/stabiliseras\n   - Utvärdera resultatet och lagra modellen på disk\n   - Visualisera modellen i [UI-dashboard](http://10.15.1.134:1881/ui)\n",
         "x": 280,
-        "y": 80,
+        "y": 120,
         "wires": []
     },
     {
@@ -1898,9 +1864,9 @@
         "id": "cd987483.6cca98",
         "type": "comment",
         "z": "6b6290b0.1a853",
-        "name": "Hämta iris data",
-        "info": "Detta \"flow\" hämtar iris datasetet ifrån github repo via ett https anrop.\n\nGå till [iris-dataset](https://gist.githubusercontent.com/curran/a08a1080b88344b0c8a7/raw/d546eaee765268bf2f487608c537c05e22e4b221/iris.csv) för att see datasetet själv ;)",
-        "x": 90,
+        "name": "iris data",
+        "info": "Detta \"flow\" hämtar iris datasetet ifrån github repo via ett https anrop.\n\nGå till [iris-dataset](https://gist.githubusercontent.com/curran/a08a1080b88344b0c8a7/raw/d546eaee765268bf2f487608c537c05e22e4b221/iris.csv) för att see datasetet själv ;)\n\nData preprocessing\n- formatera data labels\n- Dela in datasetet till träning och test data\n- Visualisera data i [UI-dashboard](http://10.15.1.134:1881/ui)\n",
+        "x": 60,
         "y": 100,
         "wires": []
     },
@@ -2970,41 +2936,14 @@
             "42b68b58.f7ca44",
             "3d4e2fac.6bc8f8",
             "22eedf66.fa6088",
-            "1a35ef12.178251"
+            "1a35ef12.178251",
+            "2f05b2fd.2df2ce"
         ],
         "x": 515,
         "y": 180,
         "wires": [
             [
                 "87bd8eb0.8cabc"
-            ]
-        ]
-    },
-    {
-        "id": "3d4e2fac.6bc8f8",
-        "type": "link out",
-        "z": "e3e29167.088cf8",
-        "name": "Done processing dataset!",
-        "links": [
-            "87b44ca.338beb"
-        ],
-        "x": 1335,
-        "y": 120,
-        "wires": []
-    },
-    {
-        "id": "fec59e5e.ce8938",
-        "type": "function",
-        "z": "e3e29167.088cf8",
-        "name": "Ränsa medelandet ifrån Data preprocessing",
-        "func": "msg.payload = undefined;\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 1090,
-        "y": 120,
-        "wires": [
-            [
-                "3d4e2fac.6bc8f8"
             ]
         ]
     },
@@ -3247,22 +3186,6 @@
         "wires": [
             [
                 "42b68b58.f7ca44"
-            ]
-        ]
-    },
-    {
-        "id": "b00cee40.76d54",
-        "type": "function",
-        "z": "e3e29167.088cf8",
-        "name": "iris dataset",
-        "func": "msg.name = 'iris';\nmsg.filename = 'datasets/' + msg.name;\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 410,
-        "y": 120,
-        "wires": [
-            [
-                "c084096d.f96b5"
             ]
         ]
     },
@@ -5300,6 +5223,84 @@
         "wires": [
             [
                 "1dbe35e7.76a022"
+            ]
+        ]
+    },
+    {
+        "id": "9f554c9e.436e9",
+        "type": "inject",
+        "z": "6b6290b0.1a853",
+        "name": "Kör",
+        "topic": "",
+        "payload": "",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "1",
+        "x": 90,
+        "y": 240,
+        "wires": [
+            [
+                "853598cd.9c2578"
+            ]
+        ]
+    },
+    {
+        "id": "ce7eaa86.df50a8",
+        "type": "subflow:f6d4da8d.2deed8",
+        "z": "6b6290b0.1a853",
+        "name": "",
+        "env": [],
+        "x": 540,
+        "y": 240,
+        "wires": [
+            [
+                "cca0f65b.ea9c28"
+            ]
+        ]
+    },
+    {
+        "id": "2f05b2fd.2df2ce",
+        "type": "link out",
+        "z": "6b6290b0.1a853",
+        "name": "Done processing dataset!",
+        "links": [
+            "87b44ca.338beb"
+        ],
+        "x": 1175,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "cca0f65b.ea9c28",
+        "type": "function",
+        "z": "6b6290b0.1a853",
+        "name": "Ränsa medelandet ifrån Data preprocessing",
+        "func": "msg.payload = undefined;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 930,
+        "y": 240,
+        "wires": [
+            [
+                "2f05b2fd.2df2ce"
+            ]
+        ]
+    },
+    {
+        "id": "853598cd.9c2578",
+        "type": "function",
+        "z": "6b6290b0.1a853",
+        "name": "iris dataset",
+        "func": "msg.name = 'iris';\nmsg.filename = 'datasets/' + msg.name;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 250,
+        "y": 240,
+        "wires": [
+            [
+                "ce7eaa86.df50a8"
             ]
         ]
     }
