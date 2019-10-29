@@ -3,7 +3,7 @@
     "description": "example neural network",
     "version": "0.0.1",
     "dependencies": {
-        "node-red-dashboard": "2.15.5"
+        "node-red-dashboard": "2.17.1"
     },
     "node-red": {
         "settings": {
